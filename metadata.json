@@ -1,0 +1,6 @@
+{
+  "name": "LeGriot - Collaborative Classroom Learning",
+  "description": "Mobile-first platform enabling one teacher to orchestrate small group workshops (40-70 students, one phone per group) through interactive interdisciplinary stories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
