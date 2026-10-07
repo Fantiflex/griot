@@ -39,9 +39,9 @@ export default function App() {
   if (section === 'pitch') {
     return (
       <div>
-        <div className="bg-stone-900 text-white text-xs px-4 py-2 flex items-center justify-between">
-          <button onClick={() => navigate([])} className="font-bold hover:underline">← LeGriot</button>
-          <span className="text-stone-400">Présentation</span>
+        <div className="h-12 border-b border-line bg-surface text-sm px-6 flex items-center justify-between">
+          <button onClick={() => navigate([])} className="btn btn-ghost px-2 -ml-2">← LeGriot</button>
+          <span className="text-muted text-xs">Présentation investisseurs (version pitch)</span>
         </div>
         <PitchLandingPage onSelectView={(v) => navigate([v === 'teacher' ? 'prof' : 'groupe'])} />
       </div>

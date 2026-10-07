@@ -101,6 +101,39 @@ Mesure : respect de la charte (juge LLM avec la grille de la charte), taux de «
 
 Ajouter l'entrée dans `registry/models.json` : nom, base, langues, région, version de charte, sources de données, scores d'évaluation, date. C'est ce registre qu'une autorité éducative consulte pour choisir ou publier un modèle.
 
+## Pourquoi des données synthétiques changent quelque chose
+
+Un grand modèle propriétaire parle déjà bien kiswahili. Mais on ne peut ni l'héberger, ni le fine-tuner, ni le garantir hors ligne : il ne répond pas au cahier des charges. Le modèle que l'on fine-tune est **petit et ouvert** (Gemma 3 4B ou 12B). Sur lui, le fine-tuning agit sur trois choses mesurables :
+
+1. **Le comportement.** Sans fine-tuning, un petit modèle donne la réponse trop tôt, écrit des listes, change de langue, s'étale. Avec 2 000 exemples conformes à la charte, ces défauts chutent fortement : c'est l'effet le plus net et le plus rapide à obtenir.
+2. **Le registre.** Kiswahili scolaire, phrases courtes, oral, vocabulaire de la table et de l'ardoise : un petit modèle est médiocre dans ce registre précis, et s'y améliore avec des exemples ciblés.
+3. **Le coût.** Un modèle qui a intériorisé la charte a besoin d'un prompt système court : moins de tokens à chaque appel, donc plus rapide sur un serveur d'établissement sans GPU.
+
+Ce que le fine-tuning **ne fait pas** : ajouter des connaissances encyclopédiques fiables. L'histoire de Kilwa, les programmes, les réponses attendues restent dans le contenu des parcours (`content/`), pas dans les poids.
+
+Condition pour que le synthétique serve : le modèle **générateur** doit être plus fort que le modèle **élève**. Faire générer Gemma 4B pour entraîner Gemma 4B n'apporte rien. On génère donc avec Gemma 3 27B ou un modèle ouvert plus grand (Llama 3.3 70B, Qwen 3, DeepSeek) sur le GPU loué, on filtre avec `validate.py`, et on ancre le style avec les exemples gold rédigés à la main. À terme, les vrais dialogues de classe relus par des enseignants remplacent progressivement le synthétique : c'est la donnée que personne d'autre n'a.
+
+## Évaluation : comment savoir si l'entraînement a réussi
+
+Il n'existe pas de benchmark public « professeur socratique en kiswahili ». On combine donc quatre mesures, toutes comparées **base vs fine-tuné** sur les mêmes entrées.
+
+| Mesure | Outil | Ce qu'elle prouve |
+|---|---|---|
+| Métriques de comportement : réponse révélée trop tôt, markdown, langue, longueur, motifs interdits | `eval.py` (automatique) | Le modèle respecte la charte |
+| Juge LLM sur la grille de la charte : socratique, bienveillance, ancrage culturel, honnêteté, notes 1 à 5 | `eval.py --judge-*` avec un modèle plus grand | Qualité pédagogique perçue |
+| **Non-régression des capacités** : le fine-tuning n'a pas abîmé le modèle | `lm-evaluation-harness` sur MGSM (sw, fr : problèmes de maths d'école primaire en kiswahili et en français), Belebele (sw, fr : compréhension de lecture), AfriMMLU / IrokoBench (sw) | Le modèle compte et comprend toujours aussi bien |
+| **Évaluation humaine en aveugle** : des enseignants swahiliphones et francophones voient deux réponses (base, fine-tuné) sans savoir laquelle est laquelle et choisissent la meilleure | Fichier `eval-pairs.jsonl` produit par `eval.py`, à soumettre via un simple formulaire | La preuve qu'un investisseur et un ministère comprennent |
+
+Seuils cibles pour le premier adaptateur : réponse révélée trop tôt < 5 % (base typique : 30 à 50 %), markdown 0 %, langue correcte > 98 %, préférence humaine ≥ 70 % pour le fine-tuné, et MGSM/Belebele à ± 1 point de la base.
+
+```bash
+# Non-régression (sur la machine GPU, après pip install lm-eval)
+lm_eval --model hf --model_args pretrained=google/gemma-3-4b-it,peft=output/legriot-griot-fr-sw \
+  --tasks mgsm_direct_sw,mgsm_direct_fr,belebele_swh_Latn,belebele_fra_Latn --batch_size 8 --output_path output/lm-eval-lora
+lm_eval --model hf --model_args pretrained=google/gemma-3-4b-it \
+  --tasks mgsm_direct_sw,mgsm_direct_fr,belebele_swh_Latn,belebele_fra_Latn --batch_size 8 --output_path output/lm-eval-base
+```
+
 ## Souveraineté
 
 Les dialogues exportés d'une classe restent sur le serveur de l'établissement. L'export est une action explicite (bouton de la console enseignant, ou `GET /api/export/training.jsonl`). Aucun identifiant d'élève n'y figure : seulement le code de classe, le groupe, l'atelier, et le texte des échanges.

@@ -3,54 +3,53 @@ import type { Lang, StandMove } from '@shared/types';
 import { ui } from '@/lib/i18n';
 
 /**
- * Support robotisé vu de côté : socle, bras à deux servos, téléphone.
- * Il reproduit à l'écran les mêmes mouvements que l'ESP32 reçoit, pour que la démo
- * fonctionne avant la fabrication du matériel et pour visualiser l'état réel ensuite.
+ * Support robotisé vu de côté : socle, mât, pivot et téléphone. Trait fin, monochrome.
+ * Il reproduit les mouvements envoyés à l'ESP32, pour la démo sans matériel et comme
+ * témoin de l'état réel ensuite.
  */
-export const StandWidget: React.FC<{ pose: StandMove; connected: boolean; lang: Lang; compact?: boolean }> = ({
+export const StandWidget: React.FC<{ pose: StandMove; connected: boolean; lang: Lang; compact?: boolean; dark?: boolean }> = ({
   pose,
   connected,
   lang,
   compact = false,
+  dark = false,
 }) => {
-  const tiltDeg = pose.tilt - 90; // 0 = horizontal, positif = penché vers la table
-  const panDeg = pose.pan - 90; // 0 = face
+  const tiltDeg = pose.tilt - 90;
+  const panDeg = pose.pan - 90;
   const transition = `transform ${Math.max(200, pose.ms)}ms cubic-bezier(.4,0,.2,1)`;
-  const w = compact ? 120 : 200;
-  const h = compact ? 90 : 150;
+  const w = compact ? 110 : 200;
+  const h = compact ? 82 : 150;
+  const stroke = dark ? 'rgba(255,255,255,0.55)' : '#4a4641';
+  const faint = dark ? 'rgba(255,255,255,0.18)' : '#e7e3dd';
+  const text = dark ? 'rgba(255,255,255,0.45)' : '#8a847c';
+  const accent = 'var(--color-accent)';
+  const ok = 'var(--color-ok)';
 
   return (
-    <div className={`rounded-2xl border ${connected ? 'border-emerald-300 bg-emerald-50/60' : 'border-stone-200 bg-white'} p-3 flex ${compact ? 'flex-row items-center gap-3' : 'flex-col items-center gap-2'}`}>
+    <div className={`flex ${compact ? 'flex-row items-center gap-3' : 'flex-col items-center gap-2'} ${dark ? '' : 'card p-3'}`}>
       <svg width={w} height={h} viewBox="0 0 200 150" className="overflow-visible">
-        {/* table */}
-        <rect x="0" y="138" width="200" height="6" rx="3" fill="#d6d3d1" />
-        {/* socle */}
-        <rect x="70" y="118" width="60" height="20" rx="6" fill="#44403c" />
-        <circle cx="100" cy="128" r="3" fill={connected ? '#10b981' : '#a8a29e'} />
-        {/* mât */}
-        <rect x="96" y="60" width="8" height="60" rx="3" fill="#57534e" />
-        {/* servo pan (vue de dessus miniature) */}
-        <g transform="translate(160 30)">
-          <circle r="16" fill="#f5f5f4" stroke="#d6d3d1" />
+        <line x1="20" y1="140" x2="180" y2="140" stroke={faint} strokeWidth="2" />
+        <rect x="74" y="122" width="52" height="16" rx="4" fill="none" stroke={stroke} strokeWidth="2" />
+        <circle cx="100" cy="130" r="2.5" fill={connected ? ok : faint} />
+        <line x1="100" y1="122" x2="100" y2="62" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" />
+        <g transform="translate(164 28)">
+          <circle r="14" fill="none" stroke={faint} strokeWidth="1.5" />
           <g style={{ transition, transform: `rotate(${panDeg}deg)` }}>
-            <line x1="0" y1="0" x2="0" y2="-13" stroke="#A36B46" strokeWidth="3" strokeLinecap="round" />
+            <line x1="0" y1="0" x2="0" y2="-11" stroke={accent} strokeWidth="2.5" strokeLinecap="round" />
           </g>
-          <text y="28" textAnchor="middle" fontSize="9" fill="#78716c">pan {Math.round(pose.pan)}°</text>
+          <text y="26" textAnchor="middle" fontSize="8.5" fill={text} fontFamily="var(--font-mono)">{Math.round(pose.pan)}°</text>
         </g>
-        {/* pivot tilt + téléphone */}
         <g style={{ transition, transformOrigin: '100px 60px', transform: `rotate(${tiltDeg}deg)` }}>
-          <circle cx="100" cy="60" r="7" fill="#A36B46" />
-          <rect x="60" y="54" width="80" height="12" rx="6" fill="#1c1917" />
-          <rect x="64" y="56" width="72" height="8" rx="4" fill="#292524" />
-          <rect x="97" y="56" width="6" height="8" rx="2" fill="#0ea5e9" />
-          {/* champ de vision */}
-          <path d="M100 66 L72 120 L128 120 Z" fill="rgba(163,107,70,0.15)" />
+          <circle cx="100" cy="60" r="5" fill={accent} />
+          <rect x="62" y="54.5" width="76" height="11" rx="5.5" fill="none" stroke={stroke} strokeWidth="2" />
+          <circle cx="100" cy="60" r="1.5" fill={dark ? '#fff' : '#141311'} />
+          <path d="M100 66 L74 118 L126 118 Z" fill={dark ? 'rgba(180,85,47,0.14)' : 'rgba(180,85,47,0.10)'} />
         </g>
-        <text x="100" y="12" textAnchor="middle" fontSize="9" fill="#78716c">tilt {Math.round(pose.tilt)}°</text>
+        <text x="100" y="14" textAnchor="middle" fontSize="8.5" fill={text} fontFamily="var(--font-mono)">{Math.round(pose.tilt)}°</text>
       </svg>
       <div className={`text-xs ${compact ? '' : 'text-center'}`}>
-        <div className={`font-bold ${connected ? 'text-emerald-700' : 'text-stone-600'}`}>{connected ? ui('standConnected', lang) : ui('standSimulated', lang)}</div>
-        {!compact && <div className="text-stone-400 mt-0.5">ESP32 · 2 servos</div>}
+        <div className={`font-medium ${connected ? 'text-ok' : dark ? 'text-white/60' : 'text-ink-2'}`}>{connected ? ui('standConnected', lang) : ui('standSimulated', lang)}</div>
+        {!compact && <div className={`mt-0.5 ${dark ? 'text-white/40' : 'text-muted'}`}>ESP32 · pan / tilt</div>}
       </div>
     </div>
   );
