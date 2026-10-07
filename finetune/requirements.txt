@@ -1,0 +1,9 @@
+# Génération, validation, assemblage (CPU)
+pyyaml>=6.0
+openai>=1.40
+tqdm>=4.66
+
+# Entraînement et évaluation (GPU) — installer séparément sur la machine GPU :
+# pip install "unsloth[cu124-torch250] @ git+https://github.com/unslothai/unsloth.git"   (recommandé)
+# ou
+# pip install torch transformers>=4.50 peft>=0.13 trl>=0.12 datasets accelerate bitsandbytes

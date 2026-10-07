@@ -1,0 +1,88 @@
+# Graines pour la génération de dialogues synthétiques.
+# Chaque combinaison (contexte culturel × notion × situation) produit un exemple.
+# Les autorités éducatives ajoutent ici leurs programmes, leurs récits et leurs langues.
+
+grade: "10-14"
+
+cultures:
+  - id: kilwa
+    region: TZ
+    label: { fr: "Côte swahilie, sultanat de Kilwa, XIVe siècle", sw: "Pwani ya Waswahili, Usultani wa Kilwa, karne ya 14" }
+    objects: { fr: "boutres, sacs de riz, rouleaux de tissu, mithqal d’or, mousson", sw: "majahazi, magunia ya mchele, vitambaa, mithqal ya dhahabu, monsuni" }
+  - id: djenne
+    region: ML
+    label: { fr: "Djenné et Tombouctou, empire du Mali, XIVe siècle", sw: "Djenné na Timbuktu, Dola la Mali, karne ya 14" }
+    objects: { fr: "briques de banco, manuscrits, caravanes de sel, cauris", sw: "matofali ya udongo, maandiko, misafara ya chumvi, kauri" }
+  - id: bamoun
+    region: CM
+    label: { fr: "Royaume Bamoun, pagne Ndop, Foumban", sw: "Ufalme wa Bamoun, kitambaa cha Ndop, Foumban" }
+    objects: { fr: "motifs du pagne, écriture shü-mom, palais, greniers", sw: "michoro ya kitambaa, maandishi ya shü-mom, ikulu, ghala" }
+  - id: zimbabwe
+    region: ZW
+    label: { fr: "Grand Zimbabwe, murs de pierre sèche, XIIIe siècle", sw: "Zimbabwe Kuu, kuta za mawe, karne ya 13" }
+    objects: { fr: "murs sans mortier, enclos, mines d’or, oiseaux de stéatite", sw: "kuta bila saruji, uzio, migodi ya dhahabu, ndege wa mawe" }
+  - id: axum
+    region: ET
+    label: { fr: "Royaume d’Aksoum, stèles et commerce de la mer Rouge", sw: "Ufalme wa Aksum, nguzo na biashara ya Bahari Nyekundu" }
+    objects: { fr: "stèles de granit, pièces de monnaie, encens, port d’Adulis", sw: "nguzo za granite, sarafu, ubani, bandari ya Adulis" }
+  - id: market
+    region: PAN
+    label: { fr: "Un marché de village d’aujourd’hui", sw: "Soko la kijiji la leo" }
+    objects: { fr: "mesures de céréales, mangues, bidons d’eau, téléphone portable", sw: "vipimo vya nafaka, maembe, madumu ya maji, simu ya mkononi" }
+
+subjects:
+  math:
+    notions:
+      - { id: proportion, fr: "proportionnalité et règle de trois", sw: "uwiano na kanuni ya tatu" }
+      - { id: fraction, fr: "fraction d’une quantité", sw: "sehemu ya kiasi" }
+      - { id: perimeter, fr: "périmètre d’un rectangle et d’un polygone régulier", sw: "mzunguko wa mstatili na pembe nyingi" }
+      - { id: area, fr: "aire d’un rectangle et d’un triangle", sw: "eneo la mstatili na pembetatu" }
+      - { id: symmetry, fr: "symétrie axiale et droites parallèles", sw: "ulinganifu na mistari sambamba" }
+      - { id: decimal, fr: "multiplication de nombres décimaux", sw: "kuzidisha desimali" }
+      - { id: percent, fr: "pourcentage simple", sw: "asilimia rahisi" }
+    typical_errors:
+      - { fr: "additionne au lieu de multiplier", sw: "anajumlisha badala ya kuzidisha" }
+      - { fr: "calcule un quart au lieu de trois quarts", sw: "anahesabu robo moja badala ya robo tatu" }
+      - { fr: "oublie de doubler les côtés du rectangle", sw: "anasahau kuzidisha pande za mstatili mara mbili" }
+      - { fr: "confond aire et périmètre", sw: "anachanganya eneo na mzunguko" }
+      - { fr: "se trompe de place de la virgule", sw: "anakosea nafasi ya nukta" }
+      - { fr: "donne une réponse sans unité", sw: "anatoa jibu bila kipimo" }
+  language:
+    notions:
+      - { id: proverb, fr: "comprendre et expliquer un proverbe", sw: "kuelewa na kueleza methali" }
+      - { id: dictation, fr: "orthographe d’une phrase dictée", sw: "tahajia ya sentensi iliyotamkwa" }
+      - { id: decree, fr: "rédiger un texte court argumenté (décret, lettre)", sw: "kuandika maandishi mafupi yenye hoja (amri, barua)" }
+      - { id: narration, fr: "raconter une scène en trois phrases ordonnées", sw: "kusimulia tukio kwa sentensi tatu zilizopangwa" }
+      - { id: vocabulary, fr: "sens d’un mot dans son contexte", sw: "maana ya neno katika muktadha" }
+    typical_errors:
+      - { fr: "une faute d’orthographe sur un mot", sw: "kosa moja la tahajia" }
+      - { fr: "phrase hors sujet", sw: "sentensi isiyohusiana" }
+      - { fr: "explication trop littérale du proverbe", sw: "maelezo ya methali ya moja kwa moja mno" }
+      - { fr: "texte sans argument, seulement une affirmation", sw: "maandishi bila hoja, madai tu" }
+      - { fr: "sanction cruelle proposée dans le décret", sw: "adhabu ya kikatili katika amri" }
+  history:
+    notions:
+      - { id: trade, fr: "routes commerciales et marchandises échangées", sw: "njia za biashara na bidhaa" }
+      - { id: sources, fr: "sources historiques (récits de voyageurs, archéologie)", sw: "vyanzo vya historia (safari za wasafiri, akiolojia)" }
+      - { id: climate, fr: "climat, vents et saisons dans l’économie", sw: "hali ya hewa, pepo na misimu katika uchumi" }
+      - { id: timeline, fr: "placer des événements sur une frise", sw: "kupanga matukio kwenye mstari wa wakati" }
+      - { id: map, fr: "lire et compléter une carte", sw: "kusoma na kukamilisha ramani" }
+    typical_errors:
+      - { fr: "confond importation et exportation", sw: "anachanganya uagizaji na usafirishaji" }
+      - { fr: "anachronisme de deux siècles", sw: "makosa ya karne mbili" }
+      - { fr: "attribue une invention africaine à des étrangers", sw: "anawapa wageni uvumbuzi wa Kiafrika" }
+      - { fr: "ne cite qu’un seul élément quand deux sont demandés", sw: "anataja kitu kimoja badala ya viwili" }
+
+situations:
+  - { kind: hint, attempt: 1, weight: 3, fr: "première réponse fausse mais avec un élément juste", sw: "jibu la kwanza si sahihi lakini lina kipengele sahihi" }
+  - { kind: hint, attempt: 2, weight: 2, fr: "deuxième réponse fausse, le groupe s’approche", sw: "jibu la pili si sahihi, kikundi kinakaribia" }
+  - { kind: answer, attempt: 3, weight: 1, fr: "troisième réponse fausse, révéler la solution avec le raisonnement", sw: "jibu la tatu si sahihi, fichua suluhisho na hoja" }
+  - { kind: feedback, attempt: 1, weight: 2, fr: "réponse juste du premier coup", sw: "jibu sahihi mara ya kwanza" }
+  - { kind: feedback, attempt: 2, weight: 1, fr: "réponse juste après un indice", sw: "jibu sahihi baada ya kidokezo" }
+  - { kind: hint, weight: 2, fr: "le groupe pose une question de compréhension sur la consigne", sw: "kikundi kinauliza swali la kuelewa maagizo" }
+  - { kind: hint, weight: 1, fr: "le groupe demande la réponse directement", sw: "kikundi kinaomba jibu moja kwa moja" }
+  - { kind: encourage, weight: 1, fr: "un élève se décourage ou est moqué", sw: "mwanafunzi anakata tamaa au anadhihakiwa" }
+  - { kind: encourage, weight: 1, fr: "stéréotype de genre ou d’origine exprimé par un élève", sw: "dhana potofu ya jinsia au asili inatolewa na mwanafunzi" }
+  - { kind: refusal, weight: 1, fr: "question hors cadre scolaire (vie privée, violence, religion, argent)", sw: "swali nje ya shule (maisha binafsi, vurugu, dini, pesa)" }
+  - { kind: tell, weight: 1, fr: "ouverture de l’atelier : contexte et première consigne", sw: "ufunguzi wa warsha: muktadha na maagizo ya kwanza" }
+  - { kind: ask, weight: 1, fr: "formuler une consigne écrite claire pour l’ardoise", sw: "kutunga maagizo wazi ya kuandika ubaoni" }

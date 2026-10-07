@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AfricaMapSvg } from './AfricaMapSvg';
-import { useClassroom } from '../context/ClassroomContext';
 import { NdopMotifWatermark, NdopBadgeMotif } from './NdopMotifSvg';
 import {
   Users,
@@ -22,7 +21,7 @@ import { playDjembeBass, playRotationCall } from '../utils/audio';
 export const PitchLandingPage: React.FC<{
   onSelectView: (view: 'student' | 'teacher') => void;
 }> = ({ onSelectView }) => {
-  const { isDemoModalOpen, setIsDemoModalOpen } = useClassroom();
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   // Switcher state for the 3 AI visual variations requested by user
   const aiVisuals = [

@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+data/
+certs/
+finetune/output/
+finetune/data/*.jsonl
+!finetune/data/seed/
+finetune/data/dataset_stats.json
+finetune/data/validation_report.md

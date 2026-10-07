@@ -1,55 +1,51 @@
+import React, { useEffect, useState } from 'react';
+import type { Lang } from '@shared/types';
+import { useHashRoute } from '@/lib/realtime';
+import { Home } from '@/views/Home';
+import { TeacherConsole } from '@/views/TeacherConsole';
+import { GroupPhone } from '@/views/GroupPhone';
+import { PitchLandingPage } from '@/components/PitchLandingPage';
+
 /**
- * @license
- * SPDX-License-Identifier: Apache-2.0
+ * Routage par hash, pour survivre aux rechargements et aux liens partagés :
+ *   #/                 accueil
+ *   #/prof             créer ou reprendre une classe
+ *   #/prof/CODE        console enseignant
+ *   #/groupe           rejoindre
+ *   #/groupe/CODE/g1   téléphone de groupe
+ *   #/pitch            présentation investisseurs
  */
-
-import React from 'react';
-import { ClassroomProvider, useClassroom } from './context/ClassroomContext';
-import { HeaderNav } from './components/HeaderNav';
-import { PitchLandingPage } from './components/PitchLandingPage';
-import { StudentToghuNdopView } from './components/StudentToghuNdopView';
-import { TeacherMinimalDashboard } from './components/TeacherMinimalDashboard';
-
-const AppContent: React.FC = () => {
-  const { viewMode, setViewMode } = useClassroom();
-
-  return (
-    <div className="min-h-screen bg-[#FAFAF8] text-stone-900 flex flex-col font-sans">
-      <HeaderNav />
-      <main className="flex-1">
-        {viewMode === 'landing' ? (
-          <PitchLandingPage
-            onSelectView={(target) => setViewMode(target === 'student' ? 'group' : 'teacher')}
-          />
-        ) : viewMode === 'group' ? (
-          <StudentToghuNdopView onBackToSelection={() => setViewMode('landing')} />
-        ) : viewMode === 'teacher' ? (
-          <TeacherMinimalDashboard onBackToSelection={() => setViewMode('landing')} />
-        ) : (
-          <PitchLandingPage
-            onSelectView={(target) => setViewMode(target === 'student' ? 'group' : 'teacher')}
-          />
-        )}
-      </main>
-
-      <footer className="border-t border-stone-200/80 bg-white py-5 px-4 text-xs text-stone-500">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span className="font-serif font-black text-stone-900 text-sm">
-            LeGriot
-          </span>
-          <span className="text-stone-400 text-xs">
-            © 2026 LeGriot. All rights reserved.
-          </span>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
 export default function App() {
-  return (
-    <ClassroomProvider>
-      <AppContent />
-    </ClassroomProvider>
-  );
+  const [route, navigate] = useHashRoute();
+  const [lang, setLang] = useState<Lang>(() => {
+    try {
+      return (localStorage.getItem('legriot_ui_lang') as Lang) || 'fr';
+    } catch {
+      return 'fr';
+    }
+  });
+  useEffect(() => {
+    try {
+      localStorage.setItem('legriot_ui_lang', lang);
+    } catch {
+      /* stockage indisponible */
+    }
+  }, [lang]);
+
+  const [section, a, b] = route;
+
+  if (section === 'prof') return <TeacherConsole code={a?.toUpperCase()} lang={lang} navigate={navigate} />;
+  if (section === 'groupe') return <GroupPhone code={a?.toUpperCase()} groupId={b} lang={lang} navigate={navigate} />;
+  if (section === 'pitch') {
+    return (
+      <div>
+        <div className="bg-stone-900 text-white text-xs px-4 py-2 flex items-center justify-between">
+          <button onClick={() => navigate([])} className="font-bold hover:underline">← LeGriot</button>
+          <span className="text-stone-400">Présentation</span>
+        </div>
+        <PitchLandingPage onSelectView={(v) => navigate([v === 'teacher' ? 'prof' : 'groupe'])} />
+      </div>
+    );
+  }
+  return <Home navigate={navigate} lang={lang} setLang={setLang} />;
 }

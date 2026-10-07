@@ -1,0 +1,39 @@
+{
+  "$schema": "./models.schema.json",
+  "description": "Registre des modèles Griot. Une entrée par adaptateur ou modèle fusionné publié. Les autorités éducatives y ajoutent leurs versions.",
+  "models": [
+    {
+      "name": "gemma3-base",
+      "kind": "base",
+      "base": "google/gemma-3-4b-it",
+      "serving": { "ollama": "gemma3:4b", "vllm": "google/gemma-3-4b-it" },
+      "langs": ["fr", "sw", "en"],
+      "regions": ["PAN"],
+      "charter_version": null,
+      "data": [],
+      "eval": null,
+      "notes": "Modèle de base sans fine-tuning : le Griot repose alors uniquement sur la charte en prompt système et sur le script des ateliers.",
+      "published_at": "2026-10-07"
+    },
+    {
+      "name": "legriot-griot-fr-sw",
+      "kind": "lora",
+      "status": "planned",
+      "base": "google/gemma-3-4b-it",
+      "serving": { "ollama": "legriot-griot-fr-sw", "vllm": "legriot-griot-fr-sw" },
+      "langs": ["fr", "sw"],
+      "regions": ["TZ", "ML", "CM", "ZW", "ET", "PAN"],
+      "charter_version": "0.1",
+      "data": [
+        { "source": "gold", "path": "data/seed/gold_fr.jsonl", "count": 22 },
+        { "source": "gold", "path": "data/seed/gold_sw.jsonl", "count": 14 },
+        { "source": "synthetic", "path": "data/synthetic_fr.jsonl", "count": null },
+        { "source": "synthetic", "path": "data/synthetic_sw.jsonl", "count": null }
+      ],
+      "training": { "script": "scripts/train_lora.py", "rank": 32, "epochs": 2, "lr": 1e-4, "quantization": "4bit" },
+      "eval": null,
+      "notes": "Premier adaptateur de démonstration investisseurs : professeur socratique FR/SW sur maths, langue, histoire. À remplir après l'entraînement (eval.py écrit les scores).",
+      "published_at": null
+    }
+  ]
+}

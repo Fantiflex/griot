@@ -1,0 +1,49 @@
+# Surcouche GPU : vLLM sert Gemma 3 avec l'adaptateur LoRA LeGriot (voir finetune/README.md).
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+# Prérequis : pilote NVIDIA + nvidia-container-toolkit ; HF_TOKEN avec accès à google/gemma-3-12b-it.
+
+services:
+  web:
+    environment:
+      LLM_BASE_URL: http://vllm:8000/v1
+      LLM_API_KEY: legriot
+      # Nom servi par vLLM : le modèle de base, ou le nom de l'adaptateur LoRA activé ci-dessous.
+      LLM_MODEL: ${LLM_MODEL:-legriot-griot-fr-sw}
+      LLM_VISION_MODEL: ${LLM_VISION_MODEL:-google/gemma-3-12b-it}
+    depends_on:
+      - vllm
+      - tts
+
+  vllm:
+    image: vllm/vllm-openai:latest
+    restart: unless-stopped
+    ipc: host
+    environment:
+      HF_TOKEN: ${HF_TOKEN}
+      VLLM_ALLOW_RUNTIME_LORA_UPDATING: "false"
+    volumes:
+      - hf-cache:/root/.cache/huggingface
+      - ./finetune/output:/adapters:ro
+    command: >
+      --model ${BASE_MODEL:-google/gemma-3-12b-it}
+      --served-model-name ${BASE_MODEL:-google/gemma-3-12b-it}
+      --max-model-len 8192
+      --gpu-memory-utilization 0.90
+      --api-key legriot
+      --enable-lora
+      --max-lora-rank 64
+      --lora-modules legriot-griot-fr-sw=/adapters/legriot-griot-fr-sw
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  # Ollama n'est pas nécessaire en mode GPU vLLM.
+  ollama:
+    profiles: ["cpu"]
+
+volumes:
+  hf-cache:
