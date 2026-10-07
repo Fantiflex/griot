@@ -6,8 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
-data/
-certs/
+/data/
+/certs/
 finetune/output/
 finetune/data/*.jsonl
 !finetune/data/seed/
