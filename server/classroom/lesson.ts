@@ -5,7 +5,7 @@ import { store } from '../db';
 import { chat, chatJson, LlmUnavailableError } from '../llm/provider';
 import { askMessages, judgeMessages, summaryMessages, type JudgeResult } from '../griot/prompts';
 import { readSlate } from '../perception';
-import { levenshtein, normalizeAnswer } from '../util';
+import { deterministicJudge } from '../../shared/judge';
 import * as M from './manager';
 
 /**
@@ -163,28 +163,6 @@ export function continueLesson(code: string, groupId: string) {
 
 /* ---------- Lecture de l'ardoise et jugement ---------- */
 
-function deterministicJudge(step: ExerciseStep, reading: string, lang: Lang): boolean | null {
-  const candidates = [...(step.accept ?? []), step.expected ? t(step.expected, lang) : '', step.expected?.fr ?? ''].filter(Boolean).map(normalizeAnswer);
-  if (!candidates.length) return null; // question ouverte : seul le modèle peut juger
-  const got = normalizeAnswer(reading);
-  if (!got) return false;
-  const gotTokens = got.split(' ');
-  for (const c of candidates) {
-    if (got === c || got.includes(c)) return true;
-    const cTokens = c.split(' ');
-    if (cTokens.length === 1) {
-      if (gotTokens.some((tok) => tok === c || (c.length >= 4 && levenshtein(tok, c) <= 1))) return true;
-    } else if (levenshtein(got, c) <= Math.max(1, Math.floor(c.length / 8))) {
-      return true;
-    }
-  }
-  // Pour les listes (ex. deux marchandises), compter les correspondances distinctes.
-  if (step.accept && step.accept.length >= 4) {
-    const hits = new Set(step.accept.map(normalizeAnswer).filter((a) => gotTokens.some((tok) => tok === a || (a.length >= 4 && levenshtein(tok, a) <= 1))));
-    if (hits.size >= 2) return true;
-  }
-  return false;
-}
 
 async function modelJudge(args: Parameters<typeof judgeMessages>[0]): Promise<JudgeResult | null> {
   try {

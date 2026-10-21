@@ -18,7 +18,10 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@shared/*": ["./shared/*"]
+      "@shared/*": ["./shared/*"],
+      "@content/*": ["./content/*"],
+      "@app/*": ["./src/*"],
+      "@site/*": ["./site/src/*"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true

@@ -12,7 +12,11 @@
     "preview": "vite preview",
     "lint": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "cert:dev": "tsx scripts/make-dev-cert.ts"
+    "cert:dev": "tsx scripts/make-dev-cert.ts",
+    "site:dev": "vite --config site/vite.config.ts",
+    "site:build": "vite build --config site/vite.config.ts",
+    "site:preview": "vite preview --config site/vite.config.ts",
+    "site:deploy": "tsx scripts/deploy-site.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

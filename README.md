@@ -2,6 +2,8 @@
 
 > Un téléphone par table, posé sur un support robotisé. Un modèle à poids ouverts, hébergé sur vos serveurs, fine-tuné sur une charte, vos langues et vos programmes. Le Griot raconte, questionne, **regarde l'ardoise**, lit ce que le groupe a écrit et relance avec un indice.
 
+**Site de présentation et démo jouable : https://fantiflex.github.io/griot/**
+
 Classes de 40 à 80 élèves, groupes de 8, aucun appareil individuel. Français et kiswahili aujourd'hui ; le pipeline de fine-tuning est ouvert pour que chaque autorité éducative ajoute les siens.
 
 ## Ce que fait le produit
@@ -40,6 +42,15 @@ SSL_CERT=certs/dev-cert.pem SSL_KEY=certs/dev-key.pem npm run dev
 ```
 
 Voix serveur (optionnel) : `services/tts/README.md`. Lecture manuscrite Mathpix (optionnel) : renseigner `MATHPIX_APP_ID` et `MATHPIX_APP_KEY`.
+
+## Site de présentation
+
+Le site vitrine (`site/`) est statique et contient une démo jouable dans le navigateur, sans serveur ni modèle. Il réutilise le vrai contenu des leçons et le même juge de réponses que le serveur.
+
+```bash
+npm run site:dev       # http://localhost:5174/griot/
+npm run site:deploy    # build et publication sur GitHub Pages (branche gh-pages)
+```
 
 ## Déployer
 

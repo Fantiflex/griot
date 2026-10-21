@@ -1,0 +1,55 @@
+@import "tailwindcss" source(".");
+@import "../../src/theme.css";
+@source "../../src/components/Logo.tsx";
+@source "../index.html";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+.font-chalk {
+  font-family: "Caveat", "Comic Sans MS", cursive;
+}
+
+.slate {
+  background-color: #1f2523;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+.orb-speaking {
+  animation: orbPulse 900ms ease-in-out infinite;
+}
+
+@keyframes dots {
+  0%, 20% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+.dot-1 { animation: dots 1.2s infinite; }
+.dot-2 { animation: dots 1.2s infinite 0.2s; }
+.dot-3 { animation: dots 1.2s infinite 0.4s; }
+
+@keyframes standNod {
+  0%, 100% { transform: rotate(-6deg); }
+  25%, 75% { transform: rotate(14deg); }
+  50% { transform: rotate(-8deg); }
+}
+@keyframes standShake {
+  0%, 100% { transform: translateX(0) rotate(-6deg); }
+  20%, 60% { transform: translateX(-3px) rotate(-6deg); }
+  40%, 80% { transform: translateX(3px) rotate(-6deg); }
+}
+.stand-nod { animation: standNod 1s ease-in-out; }
+.stand-shake { animation: standShake 1s ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stand-nod, .stand-shake { animation: none; }
+  html { scroll-behavior: auto; }
+  .orb-speaking, .dot-1, .dot-2, .dot-3, .animate-fade-in { animation: none; }
+}

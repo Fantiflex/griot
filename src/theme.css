@@ -1,0 +1,183 @@
+/* Charte graphique LeGriot partagée par l'app (src/) et le site vitrine (site/). */
+/*
+  Charte graphique LeGriot — épurée, professionnelle.
+  Une seule famille typographique (Inter), une palette neutre, un accent terracotta
+  réservé aux actions et aux états. Pas d'ombres colorées, pas de motifs décoratifs.
+*/
+@theme {
+  --color-bg: #fbfaf8;
+  --color-surface: #ffffff;
+  --color-ink: #141311;
+  --color-ink-2: #4a4641;
+  --color-muted: #8a847c;
+  --color-line: #e7e3dd;
+  --color-line-2: #d6d1c9;
+  --color-accent: #b4552f;
+  --color-accent-2: #93431f;
+  --color-accent-soft: #f6e9e2;
+  --color-ok: #2f7d4f;
+  --color-ok-soft: #e6f2ea;
+  --color-warn: #b7791f;
+  --color-warn-soft: #fbf1dc;
+  --color-danger: #b42f2f;
+  --color-danger-soft: #f9e3e3;
+  --color-night: #0f0e0d;
+  --color-night-2: #1a1816;
+  --color-night-3: #26231f;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-card: 14px;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+  button, input, select, textarea {
+    font: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 10px;
+    padding: 0.625rem 1rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, opacity 120ms ease;
+    cursor: pointer;
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: #2a2724;
+  }
+  .btn-accent {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .btn-accent:hover:not(:disabled) {
+    background: var(--color-accent-2);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-2);
+  }
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--color-ink);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink-2);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: #f1eee9;
+    color: var(--color-ink);
+  }
+  .field {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--color-line-2);
+    background: var(--color-surface);
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-ink);
+  }
+  .label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink-2);
+    margin-bottom: 0.375rem;
+  }
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.6875rem;
+    font-weight: 500;
+  }
+  /* Thème sombre du téléphone de groupe */
+  .night .btn-outline {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+  .night .btn-outline:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  .night .btn-ghost {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .night .btn-ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+  .night .field {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+  .night .field::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .night .field:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 220ms ease-out both;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.14); border-radius: 999px; }
