@@ -77,6 +77,12 @@ html {
 .animate-float { animation: float 5s ease-in-out infinite; }
 .animate-float-slow { animation: float 7s ease-in-out infinite 1s; }
 
+@keyframes scan {
+  0% { top: -33%; }
+  100% { top: 100%; }
+}
+.animate-scan { animation: scan 900ms linear infinite; }
+
 /* Apparition au défilement (voir Reveal.tsx) */
 .reveal {
   opacity: 0;
@@ -89,7 +95,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stand-nod, .stand-shake, .animate-float, .animate-float-slow { animation: none; }
+  .stand-nod, .stand-shake, .animate-float, .animate-float-slow, .animate-scan { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
   .orb-speaking, .dot-1, .dot-2, .dot-3, .animate-fade-in { animation: none; }

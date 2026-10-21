@@ -20,7 +20,7 @@ const EN = {
     titleB: 'One patient teacher for every table.',
     body: 'In classrooms of 40 to 80 students, one teacher cannot reach every child. LeGriot turns a single smartphone into a Socratic tutor for each group of eight. It tells a story, asks a question, reads what students write on their slate, and guides them with hints, in French or Kiswahili, on servers the school controls.',
     ctaDemo: 'Try the demo',
-    ctaCode: 'Read the code',
+    ctaCode: 'How it works',
     meta: ['Working prototype', 'French and Kiswahili', 'Open-weight model'],
   },
   stats: {
@@ -86,9 +86,9 @@ const EN = {
   },
   demo: {
     eyebrow: 'Try it',
-    title: 'A math lesson from 14th-century Kilwa.',
-    body: 'You are a group of students on the quay of Kilwa, trading rice for cloth. Answer as if you were writing on the slate. Try a wrong answer first to see how the Griot guides you, and watch the teacher view react.',
-    note: 'This demo runs entirely in your browser with scripted feedback. In a real classroom, an open-weight model writes the feedback and the camera reads the slate.',
+    title: 'Write an answer. The Griot reads it.',
+    body: 'Three short math problems. Write your answer on the slate with your finger or mouse, then press “Read my slate”. Try a wrong answer such as 15 on the first problem: the Griot works out what went wrong and decides what to say, and the teacher view reacts.',
+    note: 'In class, the phone camera captures the slate and the same steps run on the school server.',
   },
   tech: {
     eyebrow: 'Technology',
@@ -150,8 +150,8 @@ const EN = {
   },
   contact: {
     title: 'Let’s bring a patient teacher to every table.',
-    body: 'The code, the charter and the training pipeline are open. Get in touch through GitHub.',
-    cta: 'Open the repository',
+    body: 'We are looking for a faculty advisor, a first pilot school and compute for training.',
+    cta: 'Try the demo',
   },
   footer: { licence: 'MIT licence', demo: 'Demo', charter: 'Ethics charter', code: 'Source code' },
 };
@@ -163,7 +163,7 @@ const FR: typeof EN = {
     titleB: 'Un professeur patient à chaque table.',
     body: 'Dans des classes de 40 à 80 élèves, un enseignant ne peut pas atteindre chaque enfant. LeGriot transforme un seul smartphone en tuteur socratique pour chaque groupe de huit. Il raconte, pose une question, lit ce que les élèves écrivent sur leur ardoise, puis les guide avec des indices, en français ou en kiswahili, sur des serveurs que l’école contrôle.',
     ctaDemo: 'Essayer la démo',
-    ctaCode: 'Voir le code',
+    ctaCode: 'Comment ça marche',
     meta: ['Prototype fonctionnel', 'Français et kiswahili', 'Modèle à poids ouverts'],
   },
   stats: {
@@ -229,9 +229,9 @@ const FR: typeof EN = {
   },
   demo: {
     eyebrow: 'Essayez',
-    title: 'Une leçon de maths dans la Kilwa du XIVe siècle.',
-    body: 'Vous êtes un groupe d’élèves sur le quai de Kilwa, qui échange du riz contre du tissu. Répondez comme si vous écriviez sur l’ardoise. Essayez d’abord une mauvaise réponse pour voir comment le Griot guide, et regardez la vue enseignant réagir.',
-    note: 'Cette démo tourne entièrement dans votre navigateur, avec des retours scriptés. En classe, un modèle à poids ouverts rédige les retours et la caméra lit l’ardoise.',
+    title: 'Écrivez une réponse. Le Griot la lit.',
+    body: 'Trois petits problèmes de maths. Écrivez votre réponse sur l’ardoise au doigt ou à la souris, puis appuyez sur « Lire l’ardoise ». Essayez une mauvaise réponse, par exemple 15 au premier problème : le Griot comprend l’erreur et décide quoi dire, et la vue enseignant réagit.',
+    note: 'En classe, la caméra du téléphone capture l’ardoise et les mêmes étapes tournent sur le serveur de l’école.',
   },
   tech: {
     eyebrow: 'Technologie',
@@ -293,8 +293,8 @@ const FR: typeof EN = {
   },
   contact: {
     title: 'Mettons un professeur patient à chaque table.',
-    body: 'Le code, la charte et le pipeline d’entraînement sont ouverts. Contactez-nous via GitHub.',
-    cta: 'Ouvrir le dépôt',
+    body: 'Nous cherchons un encadrant académique, une première école pilote et du calcul pour l’entraînement.',
+    cta: 'Essayer la démo',
   },
   footer: { licence: 'Licence MIT', demo: 'Démo', charter: 'Charte éthique', code: 'Code source' },
 };

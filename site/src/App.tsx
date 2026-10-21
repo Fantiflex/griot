@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   Check,
   Eye,
-  Github,
   LayoutDashboard,
   MessageCircle,
   Mic,
@@ -118,8 +117,8 @@ export const App: React.FC = () => {
                 <a href="#demo" className="btn btn-primary rounded-full px-6 py-3.5 text-base">
                   <Sparkles className="w-4 h-4 text-accent" /> {c.hero.ctaDemo} <ArrowRight className="w-4 h-4" />
                 </a>
-                <a href={REPO_URL} className="btn btn-outline rounded-full px-6 py-3.5 text-base bg-surface/70">
-                  <Github className="w-4 h-4" /> {c.hero.ctaCode}
+                <a href="#how" className="btn btn-outline rounded-full px-6 py-3.5 text-base bg-surface/70">
+                  {c.hero.ctaCode}
                 </a>
               </div>
               <ul className="mt-9 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-muted font-mono">
@@ -247,7 +246,7 @@ export const App: React.FC = () => {
         </section>
 
         {/* ================= Fonctionnement ================= */}
-        <section className="max-w-6xl mx-auto px-5 py-20 sm:py-24">
+        <section id="how" className="max-w-6xl mx-auto px-5 py-20 sm:py-24">
           <Reveal>
             <SectionHead eyebrow={c.how.eyebrow} title={c.how.title} />
           </Reveal>
@@ -357,8 +356,8 @@ export const App: React.FC = () => {
               <div className="relative">
                 <h2 className="font-display font-semibold text-3xl sm:text-5xl leading-tight max-w-3xl mx-auto">{c.contact.title}</h2>
                 <p className="mt-4 text-white/70 max-w-xl mx-auto">{c.contact.body}</p>
-                <a href={REPO_URL} className="mt-8 btn bg-white text-ink hover:bg-white/90 rounded-full px-6 py-3.5 text-base">
-                  <Github className="w-4 h-4" /> {c.contact.cta}
+                <a href="#demo" className="mt-8 btn bg-white text-ink hover:bg-white/90 rounded-full px-6 py-3.5 text-base">
+                  <Sparkles className="w-4 h-4 text-accent" /> {c.contact.cta}
                 </a>
               </div>
             </div>

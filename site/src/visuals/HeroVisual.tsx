@@ -8,38 +8,38 @@ import type { SiteLang } from '@site/copy';
 
 const T = {
   en: {
-    step: 'Math · Step 2 of 5',
-    bubble: 'Not yet. Group your pebbles in piles of three. How many piles do you get?',
+    step: 'Fractions · Attempt 2 of 3',
+    bubble: 'One quarter is right. The question asks for three quarters: how many parts do you need?',
     slate: 'Slate',
-    read: 'I read “6”',
+    read: 'I read “15”',
     done: 'We’re done',
     hint: 'A hint',
     call: 'Call the teacher',
     teacher: 'Teacher view',
     live: 'Live',
     groups: [
-      { name: 'Lion 1', state: 'Stuck after 2 tries', tone: 'warn' },
-      { name: 'Baobab 2', state: 'Writing on the slate', tone: 'muted' },
-      { name: 'River 3', state: 'Step 4 of 5 · 3 correct', tone: 'ok' },
+      { name: 'Table 1', state: 'Stuck after 2 tries', tone: 'warn' },
+      { name: 'Table 2', state: 'Writing on the slate', tone: 'muted' },
+      { name: 'Table 3', state: '3 of 3 correct', tone: 'ok' },
     ],
-    alert: 'Lion 1 needs you',
+    alert: 'Table 1 needs you',
   },
   fr: {
-    step: 'Maths · Étape 2 sur 5',
-    bubble: 'Pas encore. Groupez vos cailloux par trois. Combien de tas obtenez-vous ?',
+    step: 'Fractions · Essai 2 sur 3',
+    bubble: 'Un quart, c’est juste. La question demande trois quarts : combien de parts vous faut-il ?',
     slate: 'Ardoise',
-    read: 'J’ai lu « 6 »',
+    read: 'J’ai lu « 15 »',
     done: 'On a fini',
     hint: 'Un indice',
     call: 'Appeler l’enseignant',
     teacher: 'Vue enseignant',
     live: 'En direct',
     groups: [
-      { name: 'Lion 1', state: 'Bloqué après 2 essais', tone: 'warn' },
-      { name: 'Baobab 2', state: 'Écrit sur l’ardoise', tone: 'muted' },
-      { name: 'Fleuve 3', state: 'Étape 4 sur 5 · 3 réussites', tone: 'ok' },
+      { name: 'Table 1', state: 'Bloquée après 2 essais', tone: 'warn' },
+      { name: 'Table 2', state: 'Écrit sur l’ardoise', tone: 'muted' },
+      { name: 'Table 3', state: '3 sur 3 justes', tone: 'ok' },
     ],
-    alert: 'Lion 1 a besoin de vous',
+    alert: 'Table 1 a besoin de vous',
   },
 } as const;
 
@@ -52,7 +52,7 @@ export const HeroVisual: React.FC<{ lang: SiteLang }> = ({ lang }) => {
 
       {/* ardoise posée sur la table */}
       <div className="absolute left-[2%] bottom-[6%] w-[42%] rotate-[-8deg] rounded-xl border-[6px] border-[#7a5a3e] slate shadow-[0_18px_40px_-18px_rgba(20,19,17,0.55)] aspect-[4/3] flex flex-col items-center justify-center">
-        <span className="font-chalk text-white/85 text-5xl leading-none">6</span>
+        <span className="font-chalk text-white/85 text-5xl leading-none">15</span>
         <span className="mt-1 font-mono text-[9px] uppercase tracking-widest text-white/35">{t.slate}</span>
       </div>
 
@@ -72,7 +72,7 @@ export const HeroVisual: React.FC<{ lang: SiteLang }> = ({ lang }) => {
             </div>
             <div className="mx-3 mt-2.5 rounded-xl rounded-tl-sm bg-white text-ink p-2.5 text-[10.5px] leading-snug">{t.bubble}</div>
             <div className="mx-3 mt-2.5 rounded-lg slate border-[3px] border-[#6b4f36] h-14 flex items-center justify-center">
-              <span className="font-chalk text-white/80 text-3xl">6</span>
+              <span className="font-chalk text-white/80 text-3xl">15</span>
             </div>
             <div className="mt-3 mx-3 rounded-lg bg-accent text-white text-[10px] font-medium py-2 text-center">{t.done}</div>
             <div className="mt-auto mx-3 mb-3 grid grid-cols-2 gap-1.5 pt-3 border-t border-white/10">
