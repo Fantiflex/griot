@@ -1,7 +1,29 @@
 @import "tailwindcss" source(".");
 @import "../../src/theme.css";
-@source "../../src/components/Logo.tsx";
+@source "../../src/components/AfricaMapSvg.tsx";
+@source "../../src/components/NdopMotifSvg.tsx";
 @source "../index.html";
+
+/* Variante du site : plus chaude et plus éditoriale que l'app (inspirée de la version AI Studio). */
+@theme {
+  --color-bg: #faf8f4;
+  --color-accent: #a36b46;
+  --color-accent-2: #87553a;
+  --color-accent-soft: #f3e9e0;
+  --color-red: #b42f3c;
+  --color-red-soft: #fbe9ea;
+  --color-green: #1f7a55;
+  --color-green-soft: #e3f3ea;
+  --color-amber: #b86b12;
+  --color-amber-soft: #fbf0df;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
 
 html {
   scroll-behavior: smooth;

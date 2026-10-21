@@ -16,7 +16,8 @@ const root = path.resolve(import.meta.dirname, '..');
 const run = (cmd: string, cwd = root) => execSync(cmd, { cwd, stdio: 'inherit' });
 const out = (cmd: string, cwd = root) => execSync(cmd, { cwd, encoding: 'utf8' }).trim();
 
-const remote = out('git remote get-url origin');
+// Publie sur tous les dépôts distants configurés (ex. origin = Fantiflex, mine = fork personnel).
+const remotes = out('git remote').split(/\s+/).filter(Boolean).map((name) => ({ name, url: out(`git remote get-url ${name}`) }));
 const sourceSha = out('git rev-parse --short HEAD');
 const sourceBranch = out('git rev-parse --abbrev-ref HEAD');
 
@@ -35,8 +36,15 @@ fs.copyFileSync(path.join(tmp, 'index.html'), path.join(tmp, '404.html'));
 run('git init -q -b gh-pages', tmp);
 run('git add -A', tmp);
 run(`git commit -q -m "site: build depuis ${sourceBranch}@${sourceSha}"`, tmp);
-run(`git push -f "${remote}" gh-pages:gh-pages`, tmp);
+for (const r of remotes) {
+  console.log(`Publication sur ${r.name} (${r.url})…`);
+  run(`git push -f "${r.url}" gh-pages:gh-pages`, tmp);
+}
 fs.rmSync(tmp, { recursive: true, force: true });
 
 console.log('\nPublié sur la branche gh-pages.');
-console.log('Adresse : https://fantiflex.github.io/griot/ (une à deux minutes de délai)');
+for (const r of remotes) {
+  const m = r.url.match(/github\.com[/:]([^/]+)\/([^/.]+)/);
+  if (m) console.log(`  https://${m[1].toLowerCase()}.github.io/${m[2]}/`);
+}
+console.log('(une à deux minutes de délai ; GitHub Pages doit être activé sur chaque dépôt)');

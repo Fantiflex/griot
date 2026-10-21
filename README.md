@@ -2,7 +2,7 @@
 
 > Un téléphone par table, posé sur un support robotisé. Un modèle à poids ouverts, hébergé sur vos serveurs, fine-tuné sur une charte, vos langues et vos programmes. Le Griot raconte, questionne, **regarde l'ardoise**, lit ce que le groupe a écrit et relance avec un indice.
 
-**Site de présentation et démo jouable : https://fantiflex.github.io/griot/**
+**Site de présentation et démo jouable : https://clementdumeril.github.io/griot/**
 
 Classes de 40 à 80 élèves, groupes de 8, aucun appareil individuel. Français et kiswahili aujourd'hui ; le pipeline de fine-tuning est ouvert pour que chaque autorité éducative ajoute les siens.
 
