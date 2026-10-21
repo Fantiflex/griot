@@ -70,8 +70,27 @@ html {
 .stand-nod { animation: standNod 1s ease-in-out; }
 .stand-shake { animation: standShake 1s ease-in-out; }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-float-slow { animation: float 7s ease-in-out infinite 1s; }
+
+/* Apparition au défilement (voir Reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .stand-nod, .stand-shake { animation: none; }
+  .stand-nod, .stand-shake, .animate-float, .animate-float-slow { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
   .orb-speaking, .dot-1, .dot-2, .dot-3, .animate-fade-in { animation: none; }
 }

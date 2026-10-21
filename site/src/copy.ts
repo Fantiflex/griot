@@ -55,6 +55,12 @@ const EN = {
     ],
     illustration: 'Illustration',
     ratio: { stat: '1 : 8', title: 'One everyday smartphone for eight students.', body: 'Ten phones equip a class of eighty. No tablet per child, no computer room.' },
+    counts: [
+      { n: '10', label: 'phones' },
+      { n: '80', label: 'students' },
+      { n: '1', label: 'teacher' },
+    ],
+    classroomLabel: 'A classroom of 80 students seen from above: ten tables of eight, one phone in the middle of each table, the teacher at the front.',
     tableCaption: 'One phone on a stand, eight students, one slate',
     phoneLabel: 'phone',
     slateLabel: 'slate',
@@ -94,6 +100,13 @@ const EN = {
       { icon: 'mic', title: 'Built for noisy rooms', body: 'Push-to-talk, noise suppression, and speech recognition fine-tuned on classroom noise and African accents.', tag: 'In development', done: false },
       { icon: 'shield', title: 'An ethics charter the model must follow', body: 'A short, readable, versioned text. It is both the model’s instructions and the filter for its training data.', tag: 'Working', done: true, link: { label: 'Read the charter (French)', url: CHARTER_URL } },
     ],
+    arch: {
+      table: { title: 'At each table', sub: 'Ten phones on simple stands', items: ['Camera reads the slate', 'Speaker tells and asks', 'Push-to-talk microphone'] },
+      server: { title: 'School server', sub: 'or a rented GPU', items: ['Gemma 3, open weights', 'Lesson engine and ethics charter', 'Handwriting reading', 'Open speech models', 'Classroom data stays here'] },
+      teacher: { title: 'Teacher console', sub: 'On a laptop or a phone', items: ['Live view of every table', 'Alerts when a group is stuck', 'Review and correct the Griot'] },
+      link: 'Local Wi-Fi',
+      note: 'No foreign cloud required. A cloud handwriting reader can be switched on when the school allows it.',
+    },
     loop: {
       title: 'It gets better with every classroom.',
       body: 'Teachers can review and correct any answer the Griot gives. Corrections that pass the charter become training data. A new version ships only if it beats the current one on a fixed test set.',
@@ -140,7 +153,7 @@ const EN = {
     body: 'The code, the charter and the training pipeline are open. Get in touch through GitHub.',
     cta: 'Open the repository',
   },
-  footer: { licence: 'MIT licence' },
+  footer: { licence: 'MIT licence', demo: 'Demo', charter: 'Ethics charter', code: 'Source code' },
 };
 
 const FR: typeof EN = {
@@ -185,6 +198,12 @@ const FR: typeof EN = {
     ],
     illustration: 'Illustration',
     ratio: { stat: '1 : 8', title: 'Un smartphone ordinaire pour huit élèves.', body: 'Dix téléphones équipent une classe de quatre-vingts. Pas de tablette par enfant, pas de salle informatique.' },
+    counts: [
+      { n: '10', label: 'téléphones' },
+      { n: '80', label: 'élèves' },
+      { n: '1', label: 'enseignant' },
+    ],
+    classroomLabel: 'Une classe de 80 élèves vue du dessus : dix tables de huit, un téléphone au centre de chaque table, l’enseignant devant.',
     tableCaption: 'Un téléphone sur son support, huit élèves, une ardoise',
     phoneLabel: 'téléphone',
     slateLabel: 'ardoise',
@@ -224,6 +243,13 @@ const FR: typeof EN = {
       { icon: 'mic', title: 'Pensé pour les classes bruyantes', body: 'Appuyer pour parler, réduction du bruit, et reconnaissance vocale fine-tunée sur le bruit de classe et les accents africains.', tag: 'En développement', done: false },
       { icon: 'shield', title: 'Une charte éthique que le modèle doit suivre', body: 'Un texte court, lisible et versionné. Il sert à la fois d’instructions au modèle et de filtre pour ses données d’entraînement.', tag: 'Fonctionne', done: true, link: { label: 'Lire la charte', url: CHARTER_URL } },
     ],
+    arch: {
+      table: { title: 'À chaque table', sub: 'Dix téléphones sur des supports simples', items: ['La caméra lit l’ardoise', 'Le haut-parleur raconte et questionne', 'Micro « appuyer pour parler »'] },
+      server: { title: 'Serveur de l’école', sub: 'ou un GPU loué', items: ['Gemma 3, poids ouverts', 'Moteur de leçon et charte éthique', 'Lecture de l’écriture manuscrite', 'Modèles vocaux ouverts', 'Les données de classe restent ici'] },
+      teacher: { title: 'Console enseignant', sub: 'Sur un ordinateur ou un téléphone', items: ['Vue en direct de chaque table', 'Alerte quand un groupe bloque', 'Relire et corriger le Griot'] },
+      link: 'Wi-Fi local',
+      note: 'Aucun cloud étranger nécessaire. Un lecteur d’écriture en ligne peut être activé si l’école l’autorise.',
+    },
     loop: {
       title: 'Il s’améliore avec chaque classe.',
       body: 'Les enseignants peuvent relire et corriger chaque réponse du Griot. Les corrections conformes à la charte deviennent des données d’entraînement. Une nouvelle version n’est déployée que si elle bat l’actuelle sur un jeu de test figé.',
@@ -270,7 +296,7 @@ const FR: typeof EN = {
     body: 'Le code, la charte et le pipeline d’entraînement sont ouverts. Contactez-nous via GitHub.',
     cta: 'Ouvrir le dépôt',
   },
-  footer: { licence: 'Licence MIT' },
+  footer: { licence: 'Licence MIT', demo: 'Démo', charter: 'Charte éthique', code: 'Code source' },
 };
 
 export const COPY: Record<SiteLang, typeof EN> = { en: EN, fr: FR };
